@@ -55,6 +55,8 @@ export default function TelaExtrato(){
         <Container>
             <Topo>
                 <span>Olá, {dados.name}</span>
+                <ion-icon name="log-out-outline"></ion-icon>
+
             </Topo>
             <Registros>
             {records.length > 0 ? (
@@ -114,27 +116,94 @@ const Container = styled.div `
         align-items: center;
         justify-content: center;        
        `   
-const Topo = styled.div ``
+const Topo = styled.div `
+    width: 326px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    span{
+        color: #ffffff;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+    }
+    ion-icon{
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 25px;
+    }`
 
 const Registros = styled.div `
         width: 326px;
         height: 446px;
         background: #FFFFFF;
-        border-radius: 5px;`
+        border-radius: 5px;
+        position: relative;`
 
-const Registro = styled.div ``
+const Registro = styled.div `
+    display: flex;
+    aling-items: center;
+    justify-content: space-between;
+    padding: 12px;`
 
-const Data = styled.span ``
+const Data = styled.span `
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #C6C6C6;
+`
 
-const Descricao = styled.span ``
+const Descricao = styled.span `
+    margin-left: 7px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;`
 
-const Total = styled.div ``
+const Total = styled.div `
+    width: 326px;
+    display: flex-direction;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    h1{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 20px;
+        color: #000000;
+    }
+    h2{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 20px;
+        
+        color: #03AC00;
+    }`
 
 const Botoes = styled.div `
-        display: flex;`
+    margin-top: 13px;
+    width: 326px;
+    display: flex;
+    justify-content: space-between;`
 
 const Botao = styled.div `
         width: 155px;
         height: 114px;
         background: #A328D6;
-        border-radius: 5px;`
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 20px;`

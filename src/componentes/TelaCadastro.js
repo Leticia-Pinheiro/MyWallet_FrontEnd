@@ -57,6 +57,7 @@ export default function TelaCadastro(){
     return(
         <form onSubmit={Cadastrar}>
         <Container>
+            <h1>My Wallet</h1>
 
             <CaixaDeTexto name="name" type="text" placeholder="Nome" value = {cadastro.name} onChange={MudancaDoInput} required />                     
             <CaixaDeTexto name="email" type="email" placeholder="E-mail" value = {cadastro.email} onChange={MudancaDoInput} required />
@@ -82,7 +83,18 @@ height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;`
+justify-content: center;
+
+h1{
+    font-family: 'Saira Stencil One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 50px;
+    color: #ffffff;    
+    margin-bottom: 42px;
+    text-align: center;
+}`
 
 
 
@@ -96,7 +108,7 @@ border-radius: 8px;
 border: none;
 font-style: normal;
 font-weight: 400;
-font-size: 14px;       
+font-size: 20px;       
 ::placeholder{
     color:#7E7E7E;
 }`
@@ -108,7 +120,7 @@ margin-bottom: 24px;
 
 font-style: normal;
 font-weight: 700;
-font-size: 14px;
+font-size: 20px;
 line-height: 26px;
 text-align: center;
 color: #FFFFFF;
@@ -120,7 +132,7 @@ padding: 18px 122px;
 gap: 10px;        
 width: 298px;
 height: 52px;
-background: #FF4791;
+background: #A328D6;
 border-radius: 8px;`
 
 const LinkLogin = styled.span `        
@@ -128,7 +140,7 @@ const LinkLogin = styled.span `
 font-family: 'Roboto', sans-serif;
 font-style: normal;
 font-weight: 400;
-font-size: 14px;        
+font-size: 15px;        
 text-align: center;
 text-decoration-line: underline;
 color: #FFFFFF;`

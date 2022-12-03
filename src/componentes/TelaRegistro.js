@@ -4,7 +4,7 @@ import styled from "styled-components"
 import dayjs from 'dayjs';
 import axios from 'axios';
 
-import UserContext from './context/UserContext'
+import UserContext from '../context/UserContext'
 
 
 
