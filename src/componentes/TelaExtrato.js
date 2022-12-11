@@ -4,17 +4,29 @@ import axios from 'axios'
 import  { useNavigate }  from  'react-router-dom' 
 import  {  useState, useContext, useEffect }  from  "react" 
 
-import UserContext from './context/UserContext'
+import UserContext from '../context/UserContext'
 
 export default function TelaExtrato(){
 
     const navigate = useNavigate();
-    const {dados} = useContext(UserContext)
-    const token = dados.token
+    const {data, setData} = useContext(UserContext)   
+    const {token, id, name } = data
+    // const userId = data.id
+    // const token = data.token
+    // const name = data.name
+
     const typeRecord = ['incoming', 'outgoing'] 
     const [records, setRecords] = useState([])
     const [total, setTotal] = useState(0)
     
+    function logOut(){
+        navigate('/')
+        setData({
+            name: '',
+            email: '',            
+            password: ''
+        })
+    }
     
     useEffect(()=>{
         const config = {
@@ -23,7 +35,7 @@ export default function TelaExtrato(){
             }
         }
 
-        const promise = axios.get('http://localhost:5000/records', config)
+        const promise = axios.get(`http://localhost:5000/records/${id}`, config)
         promise.then(res => {
             setRecords(res.data)
         })
@@ -54,8 +66,8 @@ export default function TelaExtrato(){
     return(
         <Container>
             <Topo>
-                <span>Olá, {dados.name}</span>
-                <ion-icon name="log-out-outline"></ion-icon>
+                <span>Olá, {name}</span>
+                <ion-icon name="log-out-outline" onClick={logOut}></ion-icon>
 
             </Topo>
             <Registros>
@@ -77,7 +89,7 @@ export default function TelaExtrato(){
                         ))
                     ) : (
                         
-                            <span>Não há registros de entrada ou saída</span>
+                            <Message>Não há registros de entrada ou saída</Message>
                         
                     )}
                     {records.length > 0 ? (
@@ -109,13 +121,13 @@ export default function TelaExtrato(){
 }
 
 const Container = styled.div `
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;        
-       `   
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;`  
+
 const Topo = styled.div `
     width: 326px;
     display: flex;
@@ -135,17 +147,32 @@ const Topo = styled.div `
     }`
 
 const Registros = styled.div `
-        width: 326px;
-        height: 446px;
-        background: #FFFFFF;
-        border-radius: 5px;
-        position: relative;`
+    width: 326px;
+    height: 446px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;`
 
 const Registro = styled.div `
     display: flex;
     aling-items: center;
     justify-content: space-between;
     padding: 12px;`
+
+const Message = styled.span`
+    align-items: center;
+    justify-content:center;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #868686;`
 
 const Data = styled.span `
     font-family: 'Raleway';
@@ -198,12 +225,12 @@ const Botoes = styled.div `
     justify-content: space-between;`
 
 const Botao = styled.div `
-        width: 155px;
-        height: 114px;
-        background: #A328D6;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        font-size: 20px;`
+    width: 155px;
+    height: 114px;
+    background: #A328D6;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 20px;`

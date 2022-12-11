@@ -4,10 +4,10 @@ import axios from 'axios'
 import  { Link , useNavigate }  from  'react-router-dom' ;
 import  {  useState, useContext }  from  "react" ;
 
-import UserContext from './context/UserContext';
+import UserContext from '../context/UserContext';
 
-export default function TelaLogin(){
-    const {setDados} = useContext(UserContext)
+export default function SingIn(){
+    const {setData} = useContext(UserContext)
     const navigate = useNavigate()
     const [login, setLogin] = useState({
         email: '',
@@ -15,14 +15,14 @@ export default function TelaLogin(){
     })
 
 
-    function MudancaDoInput(e){
+    function changeInput(e){
         setLogin({
             ...login,
             [e.target.name]: e.target.value,
           }) 
     }
 
-    function LimparInput(){
+    function clearInput(){
         setLogin({
             email: '',
             password: ''
@@ -32,17 +32,17 @@ export default function TelaLogin(){
     function Logar(event){ 
         event.preventDefault();
 
-        const promise = axios.post('http://localhost:5000/sign-in', login)
+        const promise = axios.post('http://localhost:5000/signIn', login)
        
         promise.then(res => {            
-            setDados(res.data) 
-            navigate ("/extrato")         
+            setData(res.data) 
+            navigate ("/extract")         
         })
 
         promise.catch(erro => {
             console.log(erro)
             alert("Email ou senha incorretos!")
-            LimparInput()
+            clearInput()
         })        
     }
 
@@ -52,12 +52,12 @@ export default function TelaLogin(){
         <Container>
             <h1>My Wallet</h1>
                   
-            <CaixaDeTexto name="email" type="email" placeholder="E-mail" value = {login.email} onChange={MudancaDoInput}  required  />
-            <CaixaDeTexto name="password" type="password" placeholder="Senha" value = {login.password} onChange={MudancaDoInput} required />
+            <CaixaDeTexto name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
+            <CaixaDeTexto name="password" type="password" placeholder="Senha" value = {login.password} onChange={changeInput} required />
             
             <Entrar onClick={Logar}>Entrar</Entrar>
                         
-            <Link to = '/signup'>
+            <Link to = '/signUp'>
                 <LinkCadastro>Primeira vez? Cadastre-se!</LinkCadastro>
             </Link>
             

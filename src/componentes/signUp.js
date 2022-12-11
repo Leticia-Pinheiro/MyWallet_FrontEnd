@@ -1,39 +1,40 @@
-import React from 'react'
-import styled from "styled-components"
-import axios from 'axios'
-import { Link , useNavigate} from 'react-router-dom' ;
-import { useState } from "react" ;
+import React from 'react';
+import styled from "styled-components";
+import axios from 'axios';
+import { Link , useNavigate} from 'react-router-dom';
+import { useState } from "react";
 
-export default function TelaCadastro(){
+export default function SignUp(){
     const navigate = useNavigate()
-    const [cadastro, setCadastro] = useState({
-        email: '',
+    const [userData, setUserData] = useState({
         name: '',
+        email: '',        
         password: '',
-        passwordConfirm: ''
-    })
+        confirmedPassword: ''
+    })   
 
     function MudancaDoInput(e){
-        setCadastro({
-            ...cadastro,
+        setUserData({
+            ...userData,
             [e.target.name]: e.target.value,
           })
     }
 
     function LimparInput(){
-        setCadastro({
-            email: '',
+        setUserData({
             name: '',
+            email: '',            
             password: '',
-            passwordConfirm: ''
+            confirmedPassword: ''
         })
     }
     
-    function Cadastrar(event){
+    function Register(event){
         event.preventDefault();
 
-        if(cadastro.passwordConfirm === cadastro.password){
-            const promise = axios.post('http://localhost:5000/sign-up', cadastro)
+        if(userData.confirmedPassword === userData.password){
+            delete userData.confirmedPassword
+            const promise = axios.post('http://localhost:5000/signUp', userData)
         
             promise.then(res => {
                 console.log(res.data)
@@ -55,16 +56,16 @@ export default function TelaCadastro(){
 
 
     return(
-        <form onSubmit={Cadastrar}>
+        <form onSubmit={Register}>
         <Container>
             <h1>My Wallet</h1>
 
-            <CaixaDeTexto name="name" type="text" placeholder="Nome" value = {cadastro.name} onChange={MudancaDoInput} required />                     
-            <CaixaDeTexto name="email" type="email" placeholder="E-mail" value = {cadastro.email} onChange={MudancaDoInput} required />
-            <CaixaDeTexto name="password" type="password" placeholder="Senha" value = {cadastro.password} onChange={MudancaDoInput} required />
-            <CaixaDeTexto name="passwordConfirm" type="password" placeholder="Confirme a senha" value = {cadastro.passwordConfirm} onChange={MudancaDoInput} required />
+            <TextBox name="name" type="text" placeholder="Nome" value = {userData.name} onChange={MudancaDoInput} required />                     
+            <TextBox name="email" type="email" placeholder="E-mail" value = {userData.email} onChange={MudancaDoInput} required />
+            <TextBox name="password" type="password" placeholder="Senha" value = {userData.password} onChange={MudancaDoInput} required />
+            <TextBox name="confirmedPassword" type="password" placeholder="Confirme a senha" value = {userData.confirmedPassword} onChange={MudancaDoInput} required />
             
-            <BotaoCadastrar onClick={Cadastrar}>Cadastrar</BotaoCadastrar>
+            <RegisterButton onClick={Register}>Register</RegisterButton>
                         
             <Link to = '/'>
                 <LinkLogin>Já tem uma conta? Entre agora!</LinkLogin>
@@ -98,7 +99,7 @@ h1{
 
 
 
-const CaixaDeTexto = styled.input `
+const TextBox = styled.input `
 margin-bottom: 16px;
 box-sizing: border-box;    
 width: 299px;
@@ -113,7 +114,7 @@ font-size: 20px;
     color:#7E7E7E;
 }`
 
-const BotaoCadastrar = styled.button `
+const RegisterButton = styled.button `
 border: none;
 margin-top: 8px;
 margin-bottom: 24px;       
