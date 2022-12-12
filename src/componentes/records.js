@@ -1,25 +1,26 @@
 import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import styled from "styled-components"
+import styled from 'styled-components';
 import dayjs from 'dayjs';
 import axios from 'axios';
 
 import UserContext from '../context/UserContext'
 
-
 export default function Records(){
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
     const { typeRecord } = useParams();
-    const { dados } = useContext(UserContext);
-    const token = dados.token
+    const { data } = useContext(UserContext);
+    const {token, id} = data
     const [record, setRecord] = useState({
+        userId: id,
         value: '',
         description: '',
         date: dayjs().format('DD/MM'),
-        type: typeRecord,
+        type: typeRecord        
     });
 
-    function MudancaDoInput(e){
+    function chengeInput(e){
         setRecord({
             ...record,
             [e.target.name]: e.target.value,
@@ -28,7 +29,7 @@ export default function Records(){
 
   
     
-    function novoRegistro(event){
+    function newRecord(event){
         event.preventDefault()
 
         const config = {
@@ -44,7 +45,7 @@ export default function Records(){
                 value: '',
                 description: '',
             });
-            navigate('/extrato');
+            navigate('/extract');
         })
 
         promise.catch((err)=>{
@@ -55,27 +56,27 @@ export default function Records(){
        
 
     return (
-        <form onSubmit={novoRegistro}>
+        <form onSubmit={newRecord}>
         <Container>
-            <Topo>
+            <Top>
                 {typeRecord === 'incoming' ? (
-                    <h1>Nova Entrada</h1>
+                    <span>Nova Entrada</span>
                 ) : (
-                    <h1>Nova Saída</h1>
+                    <span>Nova Saída</span>
                 )}
-            </Topo>
-            <Formulario>
-                <CaixaDeTexto name="value" type="number" placeholder="Valor" value = {record.value} onChange={MudancaDoInput} required />
-                <CaixaDeTexto name="description" type="text" placeholder="Descrição" value = {record.description} onChange={MudancaDoInput} required />
-
+            </Top>
+            <Form>
+                <TextBox name="value" type="number" placeholder="Valor" value = {record.value} onChange={chengeInput} required />
+                <TextBox name="description" type="text" placeholder="Descrição" value = {record.description} onChange={chengeInput} required />
+                
                 {typeRecord === 'incoming' ? (
 
-                    <button onClick = {novoRegistro}>Salvar Entrada</button>
+                    <Button onClick = {newRecord}>Salvar Entrada</Button>
 
                 ) : (
-                    <button onClick = {novoRegistro}>Salvar Saída</button>
+                    <Button onClick = {newRecord}>Salvar Saída</Button>
                 )}
-            </Formulario>
+            </Form>
 
 
         </Container>
@@ -86,20 +87,62 @@ export default function Records(){
     );
 }
 
-const Container = styled.div ``
-const Topo = styled.div ``
-const Formulario = styled.div ``
-const CaixaDeTexto = styled.input `
-margin-bottom: 16px;
-box-sizing: border-box;    
-width: 299px;
-height: 52px;
-background: #FFFFFF;   
-border-radius: 8px;
-border: none;
-font-style: normal;
-font-weight: 400;
-font-size: 14px;       
-::placeholder{
-    color:#7E7E7E;
-}`
+const Container = styled.div `
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;`
+
+const Top = styled.div`
+    width: 326px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px 0 0 24px;
+    span{
+        color: #ffffff;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 31px;
+    }`
+
+const Form = styled.div `
+    margin: 40px 0 0 25px`
+
+const TextBox = styled.input `
+    margin-bottom: 13px;
+    box-sizing: border-box;    
+    width: 326px;
+    height: 58px;
+    background: #FFFFFF;   
+    border-radius: 5px;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;       
+    ::placeholder{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        color: #000000;
+        padding-left: 15px;
+    }`
+
+const Button = styled.button`
+    width: 326px;
+    height: 46px;
+    left: 25px;
+    top: 238px;
+    border: none;
+    background: #A328D6;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;`
