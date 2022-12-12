@@ -6,14 +6,11 @@ import  {  useState, useContext, useEffect }  from  "react"
 
 import UserContext from '../context/UserContext'
 
-export default function TelaExtrato(){
+export default function Extract(){
 
     const navigate = useNavigate();
     const {data, setData} = useContext(UserContext)   
-    const {token, id, name } = data
-    // const userId = data.id
-    // const token = data.token
-    // const name = data.name
+    const {token, id, name } = data    
 
     const typeRecord = ['incoming', 'outgoing'] 
     const [records, setRecords] = useState([])
@@ -47,15 +44,15 @@ export default function TelaExtrato(){
     },[])
 
     const conta = () => {
-        let valorTotal = 0
+        let totalValue = 0
         records.forEach((record) => {
             if (record.type === 'incoming') {
-                valorTotal += parseFloat(record.value)
+                totalValue += parseFloat(record.value)
             } else {
-                valorTotal -= parseFloat(record.value)
+                totalValue -= parseFloat(record.value)
             }
         });
-        return valorTotal
+        return totalValue
     };
 
     useEffect(() => {
@@ -65,19 +62,19 @@ export default function TelaExtrato(){
 
     return(
         <Container>
-            <Topo>
+            <Top>
                 <span>Olá, {name}</span>
                 <ion-icon name="log-out-outline" onClick={logOut}></ion-icon>
 
-            </Topo>
-            <Registros>
+            </Top>
+            <Records>
             {records.length > 0 ? (
                         records.map((record) => (
-                            <Registro type={record.type} key={record._id} >                             
+                            <Record type={record.type} key={record._id} >                             
                             
                                 <div>
                                     <Data>{record.date}</Data>          
-                                    <Descricao>{record.description}</Descricao>    
+                                    <Description>{record.description}</Description>    
                                 </div>
 
                                 <div>
@@ -85,7 +82,7 @@ export default function TelaExtrato(){
                                         {parseFloat(record.value).toFixed(2).replace('.', ',')}
                                     </span>                                    
                                 </div>
-                            </Registro> 
+                            </Record> 
                         ))
                     ) : (
                         
@@ -102,20 +99,20 @@ export default function TelaExtrato(){
                 ) : (
                     <Total />
                 )}
-            </Registros>
-            <Botoes>
+            </Records>
+            <Buttons>
                 
-                <Botao onClick = {() => {navigate(`/registro/${typeRecord[0]}`)}}>
+                <Button onClick = {() => {navigate(`/record/${typeRecord[0]}`)}}>
                     <span>Nova Entrada</span>
-                </Botao>
+                </Button>
                 
 
                 
-                <Botao onClick = {() => {navigate(`/registro/${typeRecord[1]}`)}}>
+                <Button onClick = {() => {navigate(`/record/${typeRecord[1]}`)}}>
                     <span>Nova Saída</span>
-                </Botao>
+                </Button>
                 
-            </Botoes>
+            </Buttons>
         </Container>
     )
 }
@@ -128,7 +125,7 @@ const Container = styled.div `
     align-items: center;
     justify-content: center;`  
 
-const Topo = styled.div `
+const Top = styled.div `
     width: 326px;
     display: flex;
     align-items: center;
@@ -146,7 +143,7 @@ const Topo = styled.div `
         font-size: 25px;
     }`
 
-const Registros = styled.div `
+const Records = styled.div `
     width: 326px;
     height: 446px;
     background: #FFFFFF;
@@ -157,7 +154,7 @@ const Registros = styled.div `
     align-items: center;
     justify-content: center;`
 
-const Registro = styled.div `
+const Record = styled.div `
     display: flex;
     aling-items: center;
     justify-content: space-between;
@@ -183,7 +180,7 @@ const Data = styled.span `
     color: #C6C6C6;
 `
 
-const Descricao = styled.span `
+const Description = styled.span `
     margin-left: 7px;
     font-family: 'Raleway';
     font-style: normal;
@@ -218,13 +215,13 @@ const Total = styled.div `
         color: #03AC00;
     }`
 
-const Botoes = styled.div `
+const Buttons = styled.div `
     margin-top: 13px;
     width: 326px;
     display: flex;
     justify-content: space-between;`
 
-const Botao = styled.div `
+const Button = styled.div `
     width: 155px;
     height: 114px;
     background: #A328D6;

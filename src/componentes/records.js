@@ -7,8 +7,7 @@ import axios from 'axios';
 import UserContext from '../context/UserContext'
 
 
-
-export default function TelaRegistro(){
+export default function Records(){
     const navigate = useNavigate()
     const { typeRecord } = useParams();
     const { dados } = useContext(UserContext);
