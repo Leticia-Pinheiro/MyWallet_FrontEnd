@@ -14,7 +14,7 @@ export default function Records(){
     const {token, id} = data
     const [record, setRecord] = useState({
         userId: id,
-        value: null,
+        value: '',
         description: '',
         date: dayjs().format('DD/MM'),
         type: typeRecord        
@@ -38,7 +38,7 @@ export default function Records(){
             }
         }
 
-        const promise = axios.post('http://localhost:5000/record', record, config)
+        const promise = axios.post('http://localhost:5000/record', {...record, value:Number(record.value)}, config)
         promise.then(()=>{
             setRecord({
                 ...record,
