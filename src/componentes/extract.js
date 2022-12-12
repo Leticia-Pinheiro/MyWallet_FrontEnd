@@ -78,9 +78,9 @@ export default function Extract(){
                                 </div>
 
                                 <div>
-                                    <span>
+                                    <Value type={record.type}>
                                         {parseFloat(record.value).toFixed(2).replace('.', ',')}
-                                    </span>                                    
+                                    </Value>                                    
                                 </div>
                             </Record> 
                         ))
@@ -149,10 +149,7 @@ const Records = styled.div `
     background: #FFFFFF;
     border-radius: 5px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;`
+    `
 
 const Record = styled.div `
     display: flex;
@@ -160,7 +157,10 @@ const Record = styled.div `
     justify-content: space-between;
     padding: 12px;`
 
-const Message = styled.span`
+const Message = styled.div`
+    width: 326px;
+    height: 446px;
+    display: flex;
     align-items: center;
     justify-content:center;
     font-family: 'Raleway';
@@ -188,6 +188,15 @@ const Description = styled.span `
     font-size: 16px;
     line-height: 19px;
     color: #000000;`
+
+const Value = styled.span `
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    color: ${type => type === 'incoming' ? `#03AC00` : `#C70000`};`
 
 const Total = styled.div `
     width: 326px;

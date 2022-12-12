@@ -14,7 +14,7 @@ export default function Records(){
     const {token, id} = data
     const [record, setRecord] = useState({
         userId: id,
-        value: '',
+        value: null,
         description: '',
         date: dayjs().format('DD/MM'),
         type: typeRecord        
@@ -24,7 +24,7 @@ export default function Records(){
         setRecord({
             ...record,
             [e.target.name]: e.target.value,
-          })
+        })
     }
 
   
