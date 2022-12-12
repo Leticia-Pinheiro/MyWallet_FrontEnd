@@ -35,6 +35,7 @@ export default function Extract(){
         const promise = axios.get(`http://localhost:5000/records/${id}`, config)
         promise.then(res => {
             setRecords(res.data)
+            console.log(records)
         })
 
         promise.catch(err => {
@@ -69,21 +70,22 @@ export default function Extract(){
             </Top>
             <Records>
             {records.length > 0 ? (
-                        records.map((record) => (
+                        records.map((record) => {
+                        return(
                             <Record type={record.type} key={record._id} >                             
                             
                                 <div>
-                                    <Data>{record.date}</Data>          
-                                    <Description>{record.description}</Description>    
+                                    <Data >{record.date}</Data>          
+                                    <Description >{record.description}</Description>    
                                 </div>
 
                                 <div>
-                                    <Value type={record.type}>
+                                    <Value type={record.type} >
                                         {parseFloat(record.value).toFixed(2).replace('.', ',')}
                                     </Value>                                    
                                 </div>
                             </Record> 
-                        ))
+                        )})
                     ) : (
                         
                             <Message>Não há registros de entrada ou saída</Message>
@@ -196,7 +198,8 @@ const Value = styled.span `
     font-size: 16px;
     line-height: 19px;
     text-align: right;
-    color: ${type => type === 'incoming' ? `#03AC00` : `#C70000`};`
+    color: ${(props) => (props.type === 'incoming' ? '#03AC00' : '#C70000')};`
+    // color: ${(props) => (props.isOutput ? '#C70000' : '#03AC00')}
 
 const Total = styled.div `
     width: 326px;
@@ -221,8 +224,9 @@ const Total = styled.div `
         font-size: 17px;
         line-height: 20px;
         
-        color: #03AC00;
+        color: #03AC00;        
     }`
+    // color: ${(props) => (props.isNegative ? '#C70000' : '#03AC00')}
 
 const Buttons = styled.div `
     margin-top: 13px;
