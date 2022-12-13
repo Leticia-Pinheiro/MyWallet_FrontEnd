@@ -29,9 +29,7 @@ export default function Records(){
 
     function BackToExtract(){
         navigate('/extract');
-    }
-
-  
+    }  
     
     function newRecord(event){
         event.preventDefault()
