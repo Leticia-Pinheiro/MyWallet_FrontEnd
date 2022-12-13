@@ -6,7 +6,7 @@ import "./assets/style/style.css"
 import SignIn from "./componentes/signIn/index"
 import SignUp from "./componentes/signUp/index"
 import Extract from "./componentes/extract/index"
-import Records from "./componentes/records"
+import Records from "./componentes/records/index"
 import UserContext from "./context/UserContext"
 
 export default function App(){
