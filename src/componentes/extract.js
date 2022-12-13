@@ -34,8 +34,7 @@ export default function Extract(){
 
         const promise = axios.get(`http://localhost:5000/records/${id}`, config)
         promise.then(res => {
-            setRecords(res.data)
-            console.log(records)
+            setRecords(res.data)            
         })
 
         promise.catch(err => {
@@ -68,8 +67,9 @@ export default function Extract(){
                 <ion-icon name="log-out-outline" onClick={logOut}></ion-icon>
 
             </Top>
-            <Records>
-            {records.length > 0 ? (
+            <Screen>
+                <Records>
+                {records.length > 0 ? (
                         records.map((record) => {
                         return(
                             <Record type={record.type} key={record._id} >                             
@@ -91,7 +91,9 @@ export default function Extract(){
                             <Message>Não há registros de entrada ou saída</Message>
                         
                     )}
-                    {records.length > 0 ? (
+                </Records>
+            
+                {records.length > 0 ? (
                     <Total conta ={total}>
                         
                             <h1>SALDO</h1>
@@ -101,7 +103,7 @@ export default function Extract(){
                 ) : (
                     <Total />
                 )}
-            </Records>
+            </Screen>
             <Buttons>
                 
                 <Button onClick = {() => {navigate(`/record/${typeRecord[0]}`)}}>
@@ -145,13 +147,18 @@ const Top = styled.div `
         font-size: 25px;
     }`
 
-const Records = styled.div `
+const Screen = styled.div `
     width: 326px;
     height: 446px;
     background: #FFFFFF;
     border-radius: 5px;
     position: relative;
     `
+
+const Records = styled.div`
+    width: 326px;
+    height: 400px;
+    overflow-y: scroll;`
 
 const Record = styled.div `
     display: flex;
@@ -225,7 +232,7 @@ const Total = styled.div `
         
         color: ${(props) => (props.conta<0 ? '#C70000' : '#03AC00')};        
     }`
-    // 
+    
 
 const Buttons = styled.div `
     margin-top: 13px;

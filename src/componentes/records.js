@@ -27,6 +27,10 @@ export default function Records(){
         })
     }
 
+    function BackToExtract(){
+        navigate('/extract');
+    }
+
   
     
     function newRecord(event){
@@ -64,6 +68,8 @@ export default function Records(){
                 ) : (
                     <span>Nova Saída</span>
                 )}
+                <ion-icon name="arrow-undo-outline" onClick={BackToExtract}></ion-icon>
+
             </Top>
             <Form>
                 <TextBox name="value" type="number" placeholder="Valor" value = {record.value} onChange={chengeInput} required />
@@ -106,6 +112,12 @@ const Top = styled.div`
         font-weight: 700;
         font-size: 26px;
         line-height: 31px;
+    }
+    ion-icon{
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 25px;
+        margin-right: 10px;
     }`
 
 const Form = styled.div `
@@ -119,17 +131,15 @@ const TextBox = styled.input `
     background: #FFFFFF;   
     border-radius: 5px;
     border: none;
+    font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;       
-    ::placeholder{
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 23px;
-        color: #000000;
-        padding-left: 15px;
+    font-size: 20px;
+    line-height: 23px; 
+    color: #000000  
+    padding-left: 15px;   
+    ::placeholder{        
+        color:#7E7E7E;        
     }`
 
 const Button = styled.button`

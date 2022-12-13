@@ -52,8 +52,8 @@ export default function SingIn(){
         <Container>
             <h1>My Wallet</h1>
                   
-            <CaixaDeTexto name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
-            <CaixaDeTexto name="password" type="password" placeholder="Senha" value = {login.password} onChange={changeInput} required />
+            <TextBox name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
+            <TextBox name="password" type="password" placeholder="Senha" value = {login.password} onChange={changeInput} required />
             
             <Entrar onClick={Logar}>Entrar</Entrar>
                         
@@ -90,7 +90,7 @@ const Container = styled.div `
 
       
 
-    const CaixaDeTexto = styled.input `
+    const TextBox = styled.input `
         margin-bottom: 16px;
         box-sizing: border-box;    
         width: 299px;
@@ -98,6 +98,7 @@ const Container = styled.div `
         background: #FFFFFF;   
         border-radius: 8px;
         border: none;
+        font-family: 'Raleway';
         font-style: normal;
         font-weight: 400;
         font-size: 20px;       
