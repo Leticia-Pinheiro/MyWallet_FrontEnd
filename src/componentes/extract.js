@@ -15,17 +15,8 @@ export default function Extract(){
     const typeRecord = ['incoming', 'outgoing'] 
     const [records, setRecords] = useState([])
     const [total, setTotal] = useState(0)
-    
-    function logOut(){
-        navigate('/')
-        setData({
-            name: '',
-            email: '',            
-            password: ''
-        })
-    }
-    
-    useEffect(()=>{
+
+    function getRecords(){
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -40,8 +31,40 @@ export default function Extract(){
         promise.catch(err => {
             console.log(err)
         })
-
+    }
+    
+    useEffect(()=>{
+        getRecords()
     },[])
+    
+    function logOut(){
+        navigate('/')
+        setData({
+            name: '',
+            email: '',            
+            password: ''
+        })
+    }
+
+    function DeleteRecord(id){      
+        
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    
+            const promise = axios.delete(`http://localhost:5000/record/${id}`, config)
+            promise.then(res => {
+                getRecords()                         
+            })
+    
+            promise.catch(err => {
+                console.log(err)
+            })                 
+    }
+
+    
 
     const conta = () => {
         let totalValue = 0
@@ -72,7 +95,7 @@ export default function Extract(){
                 {records.length > 0 ? (
                         records.map((record) => {
                         return(
-                            <Record type={record.type} key={record._id} >                             
+                            <Record type={record.type} key={record.id} >                             
                             
                                 <div>
                                     <Data >{record.date}</Data>          
@@ -82,8 +105,11 @@ export default function Extract(){
                                 <div>
                                     <Value type={record.type} >
                                         {parseFloat(record.value).toFixed(2).replace('.', ',')}
+                                        <ion-icon name="close-outline" onClick = { () => DeleteRecord(record.id)}></ion-icon>
                                     </Value>                                    
                                 </div>
+
+                                
                             </Record> 
                         )})
                     ) : (
@@ -107,12 +133,14 @@ export default function Extract(){
             <Buttons>
                 
                 <Button onClick = {() => {navigate(`/record/${typeRecord[0]}`)}}>
+                    <ion-icon name="add-circle-outline"></ion-icon>
                     <span>Nova Entrada</span>
                 </Button>
                 
 
                 
                 <Button onClick = {() => {navigate(`/record/${typeRecord[1]}`)}}>
+                    <ion-icon name="remove-circle-outline"></ion-icon>
                     <span>Nova Saída</span>
                 </Button>
                 
@@ -164,7 +192,8 @@ const Record = styled.div `
     display: flex;
     aling-items: center;
     justify-content: space-between;
-    padding: 12px;`
+    padding: 12px;
+    `
 
 const Message = styled.div`
     width: 326px;
@@ -205,13 +234,20 @@ const Value = styled.span `
     font-size: 16px;
     line-height: 19px;
     text-align: right;
-    color: ${(props) => (props.type === 'incoming' ? '#03AC00' : '#C70000')};`    
+    color: ${(props) => (props.type === 'incoming' ? '#03AC00' : '#C70000')};
+    ion-icon{
+        color:#C6C6C6;
+        font-size: 16px;
+        padding-left:10px;
+    }`  
+      
 
 const Total = styled.div `
-    width: 326px;
-    display: flex-direction;
+    width: 310px;
+    padding: 12px;
+    display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     position: absolute;
     bottom: 0;
     padding: 10px;
@@ -243,10 +279,25 @@ const Buttons = styled.div `
 const Button = styled.div `
     width: 155px;
     height: 114px;
+    cursor: pointer;
     background: #A328D6;
     border-radius: 5px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 20px;`
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;  
+    color: #ffffff;  
+    ion-icon{           
+        font-size: 25px;
+        padding: 10px;
+    }
+    span{        
+        width: 64px;
+        height: 40px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 20px;        
+        padding: 10px;
+    }`
