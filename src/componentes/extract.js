@@ -198,8 +198,7 @@ const Value = styled.span `
     font-size: 16px;
     line-height: 19px;
     text-align: right;
-    color: ${(props) => (props.type === 'incoming' ? '#03AC00' : '#C70000')};`
-    // color: ${(props) => (props.isOutput ? '#C70000' : '#03AC00')}
+    color: ${(props) => (props.type === 'incoming' ? '#03AC00' : '#C70000')};`    
 
 const Total = styled.div `
     width: 326px;
@@ -224,9 +223,9 @@ const Total = styled.div `
         font-size: 17px;
         line-height: 20px;
         
-        color: #03AC00;        
+        color: ${(props) => (props.conta<0 ? '#C70000' : '#03AC00')};        
     }`
-    // color: ${(props) => (props.isNegative ? '#C70000' : '#03AC00')}
+    // 
 
 const Buttons = styled.div `
     margin-top: 13px;
