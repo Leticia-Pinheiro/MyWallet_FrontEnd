@@ -4,7 +4,7 @@ import "./assets/style/reset.css"
 import "./assets/style/style.css"
 
 import SignIn from "./componentes/signIn/index"
-import SignUp from "./componentes/signUp"
+import SignUp from "./componentes/signUp/index"
 import Extract from "./componentes/extract"
 import Records from "./componentes/records"
 import UserContext from "./context/UserContext"
