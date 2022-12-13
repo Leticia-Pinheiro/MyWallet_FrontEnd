@@ -7,8 +7,8 @@ import  {  useState, useContext, useEffect }  from  "react"
 import UserContext from '../context/UserContext'
 
 export default function Extract(){
-
     const navigate = useNavigate();
+
     const {data, setData} = useContext(UserContext)   
     const {token, id, name } = data    
 
@@ -16,14 +16,19 @@ export default function Extract(){
     const [records, setRecords] = useState([])
     const [total, setTotal] = useState(0)
 
-    function getRecords(){
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
         }
+    }
+    const API_URL = `http://localhost:5000/`
 
-        const promise = axios.get(`http://localhost:5000/records/${id}`, config)
+
+    
+
+    function getRecords(){        
+
+        const promise = axios.get(API_URL+`records/${id}`, config)
         promise.then(res => {
             setRecords(res.data)            
         })
@@ -32,11 +37,23 @@ export default function Extract(){
             console.log(err)
         })
     }
-    
+
     useEffect(()=>{
         getRecords()
     },[])
+
+    function DeleteRecord(id){   
+
+        const promise = axios.delete(`http://localhost:5000/record/${id}`, config)
+        promise.then(res => {
+            getRecords()                         
+        })
     
+        promise.catch(err => {
+            console.log(err)
+        })          
+    }
+       
     function logOut(){
         navigate('/')
         setData({
@@ -44,29 +61,9 @@ export default function Extract(){
             email: '',            
             password: ''
         })
-    }
+    }  
 
-    function DeleteRecord(id){      
-        
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-    
-            const promise = axios.delete(`http://localhost:5000/record/${id}`, config)
-            promise.then(res => {
-                getRecords()                         
-            })
-    
-            promise.catch(err => {
-                console.log(err)
-            })                 
-    }
-
-    
-
-    const conta = () => {
+    function conta() {
         let totalValue = 0
         records.forEach((record) => {
             if (record.type === 'incoming') {
@@ -88,8 +85,8 @@ export default function Extract(){
             <Top>
                 <span>Olá, {name}</span>
                 <ion-icon name="log-out-outline" onClick={logOut}></ion-icon>
-
             </Top>
+
             <Screen>
                 <Records>
                 {records.length > 0 ? (
@@ -120,7 +117,7 @@ export default function Extract(){
                 </Records>
             
                 {records.length > 0 ? (
-                    <Total conta ={total}>
+                    <Total conta = {total}>
                         
                             <h1>SALDO</h1>
                             <h2>R$ {total.toFixed(2).replace('.', ',')}</h2>
