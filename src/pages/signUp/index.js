@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import { Link , useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { useState } from "react";
-import {Container, TextBox, RegisterButton, LinkLogin} from "./style"
+
+import SignUpLayout from '../../layouts/signUpLayout';
 
 export default function SignUp(){
     const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function SignUp(){
         confirmedPassword: ''
     })   
 
-    function MudancaDoInput(e){
+    function ChangeInput(e){
         setUserData({
             ...userData,
             [e.target.name]: e.target.value,
@@ -57,21 +58,7 @@ export default function SignUp(){
 
     return(
         <form onSubmit={Register}>
-        <Container>
-            <h1>My Wallet</h1>
-
-            <TextBox name="name" type="text" placeholder="Nome" value = {userData.name} onChange={MudancaDoInput} required />                     
-            <TextBox name="email" type="email" placeholder="E-mail" value = {userData.email} onChange={MudancaDoInput} required />
-            <TextBox name="password" type="password" placeholder="Senha" value = {userData.password} onChange={MudancaDoInput} required />
-            <TextBox name="confirmedPassword" type="password" placeholder="Confirme a senha" value = {userData.confirmedPassword} onChange={MudancaDoInput} required />
-            
-            <RegisterButton onClick={Register}>Register</RegisterButton>
-                        
-            <Link to = '/'>
-                <LinkLogin>Já tem uma conta? Entre agora!</LinkLogin>
-            </Link>
-            
-        </Container>       
+            <SignUpLayout Register={Register} ChangeInput={ChangeInput} userData={userData}/>
         </form>
     )
     
