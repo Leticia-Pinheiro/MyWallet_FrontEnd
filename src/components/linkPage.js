@@ -1,12 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const LinkPage = styled.span `        
-font-family: 'Roboto', sans-serif;
-font-style: normal;
-font-weight: 400;
-font-size: 15px;        
-text-align: center;
-text-decoration-line: underline;
-color: #FFFFFF;`
+const LinkPage = styled(Link)`        
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;        
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    margin-top: 32px;`
 
 export { LinkPage };

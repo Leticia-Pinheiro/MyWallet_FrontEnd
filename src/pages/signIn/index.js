@@ -7,7 +7,7 @@ import SignInLayout from '../../layouts/signInLayout';
 import UserContext from '../../context/UserContext';
 
 export default function SingIn(){
-    
+
     const {setData} = useContext(UserContext)
     const navigate = useNavigate()
     const [login, setLogin] = useState({
@@ -49,7 +49,7 @@ export default function SingIn(){
 
     return (
         <form onSubmit={Logar}>
-            <SignInLayout Logar={Logar} ChangeInput={ChangeInput} login={login} setLogin={setLogin} />
+            <SignInLayout Logar={Logar} ChangeInput={ChangeInput} login={login} />
         </form>     
     )
 }
