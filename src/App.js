@@ -3,10 +3,10 @@ import  {  useState  }  from  'react' ;
 import "./assets/style/reset.css"
 import "./assets/style/style.css"
 
-import SignIn from "./componentes/signIn/index"
-import SignUp from "./componentes/signUp/index"
-import Extract from "./componentes/extract/index"
-import Records from "./componentes/records/index"
+import SignIn from "./pages/signIn/index"
+import SignUp from "./pages/signUp/index"
+import Extract from "./pages/extract/index"
+import Records from "./pages/records/index"
 import UserContext from "./context/UserContext"
 
 export default function App(){

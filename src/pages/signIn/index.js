@@ -52,7 +52,7 @@ export default function SingIn(){
         <Container>
             <h1>My Wallet</h1>
                   
-            <TextBox name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
+            <TextBox autocomplete="off" name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
             <TextBox name="password" type="password" placeholder="Senha" value = {login.password} onChange={changeInput} required />
             
             <Button onClick={Logar}>Entrar</Button>
