@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from 'axios'
-import  { Link , useNavigate }  from  'react-router-dom' ;
+import  { useNavigate }  from  'react-router-dom' ;
 import  {  useState, useContext }  from  "react" ;
-import {Container, TextBox, Button, LinkSignUp} from "./style"
+import SignInLayout from '../../layouts/signInLayout';
 
 import UserContext from '../../context/UserContext';
 
 export default function SingIn(){
+    
     const {setData} = useContext(UserContext)
     const navigate = useNavigate()
     const [login, setLogin] = useState({
@@ -15,14 +16,14 @@ export default function SingIn(){
     })
 
 
-    function changeInput(e){
+    function ChangeInput(e){
         setLogin({
             ...login,
             [e.target.name]: e.target.value,
           }) 
     }
 
-    function clearInput(){
+    function ClearInput(){
         setLogin({
             email: '',
             password: ''
@@ -42,29 +43,14 @@ export default function SingIn(){
         promise.catch(erro => {
             console.log(erro)
             alert("Email ou senha incorretos!")
-            clearInput()
+            ClearInput()
         })        
-    }
+    }   
 
     return (
         <form onSubmit={Logar}>
-
-        <Container>
-            <h1>My Wallet</h1>
-                  
-            <TextBox autocomplete="off" name="email" type="email" placeholder="E-mail" value = {login.email} onChange={changeInput}  required  />
-            <TextBox name="password" type="password" placeholder="Senha" value = {login.password} onChange={changeInput} required />
-            
-            <Button onClick={Logar}>Entrar</Button>
-                        
-            <Link to = '/signUp'>
-                <LinkSignUp>Primeira vez? Cadastre-se!</LinkSignUp>
-            </Link>
-            
-        </Container>
-
-        </form> 
-    
+            <SignInLayout Logar={Logar} ChangeInput={ChangeInput} login={login} setLogin={setLogin} />
+        </form>     
     )
 }
 
