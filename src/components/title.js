@@ -5,7 +5,7 @@ width: 326px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-margin: 25px 0 0 24px;
+margin-bottom: 22px;
 span{
     color: #ffffff;
     font-family: 'Raleway';
@@ -17,8 +17,7 @@ span{
 ion-icon{
     cursor: pointer;
     color: #ffffff;
-    font-size: 25px;
-    margin-right: 10px;
+    font-size: 25px;    
 }`
 
 export {Title}

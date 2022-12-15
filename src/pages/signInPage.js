@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import  { useNavigate }  from  'react-router-dom';
 import  {  useState, useContext }  from  'react';
-import SignInLayout from '../../layouts/signInLayout';
+import SignInLayout from '../layouts/signInLayout';
 
-import UserContext from '../../context/UserContext';
+import UserContext from '../context/UserContext';
 
 export default function SingIn(){
 

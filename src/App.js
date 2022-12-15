@@ -3,8 +3,8 @@ import  {  useState  }  from  'react' ;
 import "./assets/style/reset.css"
 import "./assets/style/style.css"
 
-import SignIn from "./pages/signIn/index"
-import SignUp from "./pages/signUp/index"
+import SignIn from "./pages/signInPage"
+import SignUp from "./pages/signUpPage"
 import Extract from "./pages/extract/index"
 import Records from "./pages/records/index"
 import UserContext from "./context/UserContext"

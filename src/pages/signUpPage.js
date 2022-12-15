@@ -2,17 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate} from 'react-router-dom';
 import { useState } from "react";
-
-import SignUpLayout from '../../layouts/signUpLayout';
+import SignUpLayout from '../layouts/signUpLayout';
+import ExtractLayout from '../layouts/extractLayout';
 
 export default function SignUp(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         name: '',
         email: '',        
         password: '',
         confirmedPassword: ''
-    })   
+    }) ;
 
     function ChangeInput(e){
         setUserData({
@@ -21,7 +21,7 @@ export default function SignUp(){
           })
     }
 
-    function LimparInput(){
+    function ClearInput(){
         setUserData({
             name: '',
             email: '',            
@@ -45,23 +45,20 @@ export default function SignUp(){
             promise.catch(erro => {
                 console.log(erro)
                 alert("ERRO!")
-                LimparInput()
+                ClearInput()
             })
         }else{
             alert("Senhas não compatíveis!")
-        }
-
-        
-        
+        }        
     }
 
 
     return(
         <form onSubmit={Register}>
-            <SignUpLayout Register={Register} ChangeInput={ChangeInput} userData={userData}/>
+            <SignUpLayout Register={Register} ChangeInput={ChangeInput} userData={userData}/>            
         </form>
-    )
-    
+        
+    )    
 }
 
 
