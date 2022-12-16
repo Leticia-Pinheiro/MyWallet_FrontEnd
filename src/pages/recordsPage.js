@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Top, Form, TextBox, Button } from "./style"
+import RecordsLayout from '../layouts/recordsLayout';
 import dayjs from 'dayjs';
 import axios from 'axios';
 
-import UserContext from '../../context/UserContext'
+import UserContext from '../context/UserContext'
 
 export default function Records(){
 
@@ -20,7 +20,7 @@ export default function Records(){
         type: typeRecord        
     });
 
-    function chengeInput(e){
+    function ChangeInput(e){
         setRecord({
             ...record,
             [e.target.name]: e.target.value,
@@ -59,35 +59,8 @@ export default function Records(){
 
     return (
         <form onSubmit={newRecord}>
-        <Container>
-            <Top>
-                {typeRecord === 'incoming' ? (
-                    <span>Nova Entrada</span>
-                ) : (
-                    <span>Nova Saída</span>
-                )}
-                <ion-icon name="arrow-undo-outline" onClick={BackToExtract}></ion-icon>
-
-            </Top>
-            <Form>
-                <TextBox name="value" type="number" placeholder="Valor" value = {record.value} onChange={chengeInput} required />
-                <TextBox name="description" type="text" placeholder="Descrição" value = {record.description} onChange={chengeInput} required />
-                
-                {typeRecord === 'incoming' ? (
-
-                    <Button onClick = {newRecord}>Salvar Entrada</Button>
-
-                ) : (
-                    <Button onClick = {newRecord}>Salvar Saída</Button>
-                )}
-            </Form>
-
-
-        </Container>
-
-
-        
+            <RecordsLayout typeRecord={typeRecord} BackToExtract={BackToExtract} record={record} ChangeInput={ChangeInput} newRecord={newRecord}/>
         </form>
-    );
+    )
 }
 

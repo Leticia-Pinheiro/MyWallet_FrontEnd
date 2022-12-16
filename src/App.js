@@ -5,8 +5,8 @@ import "./assets/style/style.css"
 
 import SignIn from "./pages/signInPage"
 import SignUp from "./pages/signUpPage"
-import Extract from "./pages/extract/index"
-import Records from "./pages/records/index"
+import Extract from "./pages/extractPage"
+import Records from "./pages/recordsPage"
 import UserContext from "./context/UserContext"
 
 export default function App(){

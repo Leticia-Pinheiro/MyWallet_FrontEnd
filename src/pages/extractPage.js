@@ -2,8 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import  { useNavigate }  from  'react-router-dom' 
 import  {  useState, useContext, useEffect }  from  "react" 
-import ExtractLayout from '../../layouts/extractLayout'
-import UserContext from '../../context/UserContext'
+import ExtractLayout from '../layouts/extractLayout'
+import UserContext from '../context/UserContext'
 
 export default function Extract(){
     const navigate = useNavigate();
